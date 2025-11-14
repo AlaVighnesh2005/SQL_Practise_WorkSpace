@@ -7,77 +7,77 @@ These files demonstrate my self-driven learning process across core SQL areas, i
 📂 Repository Structure
 1️⃣ WorkSpace 1 – DDL Commands
 
-Table creation, modification, and deletion
+*Table creation, modification, and deletion
 
-Adding/dropping columns
+*Adding/dropping columns
 
-Applying and validating constraints
+*Applying and validating constraints
 
-Understanding ORA errors and fixing them
+*Understanding ORA errors and fixing them
 
 2️⃣ WorkSpace 2 – DML Commands
 
-Insert, update, delete operations
+*Insert, update, delete operations
 
-Constraint violations and resolutions
+*Constraint violations and resolutions
 
-Foreign key setups and table relationships
+*Foreign key setups and table relationships
 
-Practical table editing and validations
+*Practical table editing and validations
 
 3️⃣ WorkSpace 3 – Practice Sheet 1
 
-Table creation and renaming
+*Table creation and renaming
 
-Value insertion with constraints
+*Value insertion with constraints
 
-Error handling (ORA-12899, ORA-00947, etc.)
+*Error handling (ORA-12899, ORA-00947, etc.)
 
-Table truncation and deletion
+*Table truncation and deletion
 
 4️⃣ WorkSpace 4 – DQL Commands
 
-SELECT operations
+*SELECT operations
 
-Filtering using WHERE, IN, BETWEEN, LIKE
+*Filtering using WHERE, IN, BETWEEN, LIKE
 
-Arithmetic operations on columns
+*Arithmetic operations on columns
 
-NULL handling
+*NULL handling
 
-Ordering and conditional querying
+*Ordering and conditional querying
 
 5️⃣ WorkSpace 5 – Practice Sheet 2
 
-Attribute selection using aliases
+*Attribute selection using aliases
 
-DISTINCT usage
+*DISTINCT usage
 
-WHERE clause conditions
+*WHERE clause conditions
 
-Interactive input with substitution variables
+*Interactive input with substitution variables
 
-Deletions and record updates
+*Deletions and record updates
 
 6️⃣ WorkSpace 6 – Mini Project
 
-Cricket database mini-project
+*Cricket database mini-project
 
-GROUP BY, HAVING, ORDER BY
+*GROUP BY, HAVING, ORDER BY
 
-Aggregations and analytical queries
+*Aggregations and analytical queries
 
-Realistic dataset creation and exploration
+*Realistic dataset creation and exploration
 
 7️⃣ WorkSpace 7 – Views
 
-Creating and querying views
+*Creating and querying views
 
-View definitions for IT and CSE students
+*View definitions for IT and CSE students
 
-Error corrections (nonexisting table/view)
+*Error corrections (nonexisting table/view)
 
-Querying and validating view results
+*Querying and validating view results
 
 🎯 Purpose of This Repository
 
@@ -85,29 +85,29 @@ This repository serves as a structured collection of my self-practiced SQL learn
 
 🛠️ Tools & Environment
 
-Oracle MySQL 21c Express Edition
+*Oracle MySQL 21c Express Edition
 
-SQL*Plus Terminal
+*SQL*Plus Terminal
 
-SPOOL for capturing outputs
+*SPOOL for capturing outputs
 
-Local practice environment
+*Local practice environment
 
 📚 Key Learning Outcomes
 
 Through these exercises, I gained valuable skills in:
 
-Database design and schema creation
+*Database design and schema creation
 
-Writing efficient SQL queries
+*Writing efficient SQL queries
 
-Understanding Oracle-specific errors and constraints
+*Understanding Oracle-specific errors and constraints
 
-Handling real-world data operations
+*Handling real-world data operations
 
-Creating modular database structures using views
+*Creating modular database structures using views
 
-Building mini analytical projects using GROUP BY and HAVING
+*Building mini analytical projects using GROUP BY and HAVING
 
 🤝 Contributing
 
