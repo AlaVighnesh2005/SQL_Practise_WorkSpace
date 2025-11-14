@@ -1,0 +1,159 @@
+SQL> create table batting(name varchar2(20),jersey number(2),age number(2));
+
+Table created.
+
+SQL> desc batting;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ NAME                                               VARCHAR2(20)
+ JERSEY                                             NUMBER(2)
+ AGE                                                NUMBER(2)
+
+SQL> alter table batting add style char(5);
+
+Table altered.
+
+SQL> desc batting;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ NAME                                               VARCHAR2(20)
+ JERSEY                                             NUMBER(2)
+ AGE                                                NUMBER(2)
+ STYLE                                              CHAR(5)
+
+SQL> alter table batting drop column style;
+
+Table altered.
+
+SQL> desc batting;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ NAME                                               VARCHAR2(20)
+ JERSEY                                             NUMBER(2)
+ AGE                                                NUMBER(2)
+
+SQL> alter table batting modify name varchar2(25);
+
+Table altered.
+
+SQL> drop table batting;
+
+Table dropped.
+
+SQL> desc batting;
+ERROR:
+ORA-04043: object batting does not exist 
+
+
+SQL> create table scorecard(name varchar2(20),runs number(2),balls number(2));
+
+Table created.
+
+SQL> desc scorecard;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ NAME                                               VARCHAR2(20)
+ RUNS                                               NUMBER(2)
+ BALLS                                              NUMBER(2)
+
+
+SQL> insert into scorecard values('ROHIT SHARMA',73,42);
+
+1 row created.
+
+SQL> insert into scorecard values('YASASWI JAISWAL',33,17);
+
+1 row created.
+
+SQL> insert into scorecard values('VIRAT KOHLI',56,34);
+
+1 row created.
+
+SQL> select * from scorecard;
+
+NAME                       RUNS      BALLS                                      
+-------------------- ---------- ----------                                      
+ROHIT SHARMA                 73         42                                      
+YASASWI JAISWAL              33         17                                      
+VIRAT KOHLI                  56         34                                      
+
+SQL> alter table scorecard add constraint my_constraint unique(name);
+
+Table altered.
+
+SQL> insert into scorecard values('VIRAT KOHLI',99,33);
+insert into scorecard values('VIRAT KOHLI',99,33)
+*
+ERROR at line 1:
+ORA-00001: unique constraint (SYSTEM.MY_CONSTRAINT) violated 
+
+
+SQL> alter table scorecard drop constraint my_constraint;
+
+Table altered.
+
+SQL> alter table scorecard add constraint primary_constraint primary key(name);
+
+Table altered.
+
+SQL> desc scorecard;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ NAME                                      NOT NULL VARCHAR2(20)
+ RUNS                                               NUMBER(2)
+ BALLS                                              NUMBER(2)
+
+SQL> insert into scorecard values(null,23,12);
+insert into scorecard values(null,23,12)
+                             *
+ERROR at line 1:
+ORA-01400: cannot insert NULL into ("SYSTEM"."SCORECARD"."NAME") 
+
+
+SQL> alter table scorecard drop constraint primary_constraint;
+
+Table altered.
+
+SQL> desc scorecard;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ NAME                                               VARCHAR2(20)
+ RUNS                                               NUMBER(2)
+ BALLS                                              NUMBER(2)
+
+SQL> alter table scorecard add constraint check_constaint check(runs>80);
+alter table scorecard add constraint check_constaint check(runs>80)
+                                     *
+ERROR at line 1:
+ORA-02293: cannot validate (SYSTEM.CHECK_CONSTAINT) - check constraint violated 
+
+
+SQL> alter table scorecard add constraint check_constaint check(runs>70);
+alter table scorecard add constraint check_constaint check(runs>70)
+                                     *
+ERROR at line 1:
+ORA-02293: cannot validate (SYSTEM.CHECK_CONSTAINT) - check constraint violated 
+
+
+SQL> alter table scorecard add constraint check_constaint check(runs<60);
+alter table scorecard add constraint check_constaint check(runs<60)
+                                     *
+ERROR at line 1:
+ORA-02293: cannot validate (SYSTEM.CHECK_CONSTAINT) - check constraint violated 
+
+
+SQL> alter table scorecard add constraint check_constaint check runs<60;
+alter table scorecard add constraint check_constaint check runs<60
+                                                           *
+ERROR at line 1:
+ORA-00906: missing left parenthesis 
+
+
+SQL> alter table scorecard add constraint check_constaint check(balls>40);
+alter table scorecard add constraint check_constaint check(balls>40)
+                                     *
+ERROR at line 1:
+ORA-02293: cannot validate (SYSTEM.CHECK_CONSTAINT) - check constraint violated 
+
+
+SQL> spool off;

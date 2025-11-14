@@ -1,0 +1,78 @@
+SQL> create table stud_db(sid number(3),sname varchar2(10),perc number(3),gender varchar2(6),branch varchar2(5));
+
+Table created.
+
+SQL> desc stud_db;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ SID                                                NUMBER(3)
+ SNAME                                              VARCHAR2(10)
+ PERC                                               NUMBER(3)
+ GENDER                                             VARCHAR2(6)
+ BRANCH                                             VARCHAR2(5)
+
+SQL> insert into stud_db values(101, 'ramu',78,'MALE','IT');
+
+1 row created.
+
+SQL> insert into stud_db values(102,'ramya',85,'FEMALE','IT');
+
+1 row created.
+
+SQL> insert into stud_db values(103,'Hari',56,'MALE','ECE');
+
+1 row created.
+
+SQL> insert into stud_db values(104,'vasu',65,'FEMALE','CSE');
+
+1 row created.
+
+SQL> select * from stu_db;
+select * from stu_db
+              *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> select * from stud_db;
+
+       SID SNAME            PERC GENDER BRANC                                   
+---------- ---------- ---------- ------ -----                                   
+       101 ramu               78 MALE   IT                                      
+       102 ramya              85 FEMALE IT                                      
+       103 Hari               56 MALE   ECE                                     
+       104 vasu               65 FEMALE CSE                                     
+
+SQL> create view it_stud as select * from stud_db where branch='IT';
+
+View created.
+
+SQL> select * from it_stud;
+
+       SID SNAME            PERC GENDER BRANC                                   
+---------- ---------- ---------- ------ -----                                   
+       101 ramu               78 MALE   IT                                      
+       102 ramya              85 FEMALE IT                                      
+
+SQL> create view cse_stud as select * from stu_db where branch='CSE';
+create view cse_stud as select * from stu_db where branch='CSE'
+                                      *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> create view cse_stud as select * from stud_db where branch='CSE';
+
+View created.
+
+SQL> select * from cse_stud;
+
+       SID SNAME            PERC GENDER BRANC                                   
+---------- ---------- ---------- ------ -----                                   
+       104 vasu               65 FEMALE CSE                                     
+
+SQL> commit;
+
+Commit complete.
+
+SQL> spool off;

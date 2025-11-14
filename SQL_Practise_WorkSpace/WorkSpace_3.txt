@@ -1,0 +1,194 @@
+SQL> create table cric(name varchar2(15),runs number(3),balls number(3),average number(4,2));
+
+Table created.
+
+SQL> desc cric;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ NAME                                               VARCHAR2(15)
+ RUNS                                               NUMBER(3)
+ BALLS                                              NUMBER(3)
+ AVERAGE                                            NUMBER(4,2)
+
+SQL> insert into cric values('ROHIT SHARMA',109,91,46.39);
+
+1 row created.
+
+SQL> insert into cric values('YASASWI JAISWAL',54,61,65.49);
+
+1 row created.
+
+SQL> insert into cric values('VIRAT KOHLI',69,121,49.54
+  2  );
+
+1 row created.
+
+SQL> insert into cric values('SHARFARAZ KHAN',56,52,53.12);
+
+1 row created.
+
+SQL> select * from cric;
+
+NAME                  RUNS      BALLS    AVERAGE                                
+--------------- ---------- ---------- ----------                                
+ROHIT SHARMA           109         91      46.39                                
+YASASWI JAISWAL         54         61      65.49                                
+VIRAT KOHLI             69        121      49.54                                
+SHARFARAZ KHAN          56         52      53.12                                
+
+SQL> select runs,balls from cric;
+
+      RUNS      BALLS                                                           
+---------- ----------                                                           
+       109         91                                                           
+        54         61                                                           
+        69        121                                                           
+        56         52                                                           
+
+SQL> select name,runs,balls from cric;
+
+NAME                  RUNS      BALLS                                           
+--------------- ---------- ----------                                           
+ROHIT SHARMA           109         91                                           
+YASASWI JAISWAL         54         61                                           
+VIRAT KOHLI             69        121                                           
+SHARFARAZ KHAN          56         52                                           
+
+SQL> insert into cric values('SHUBMAN GILL',19,65,39.32);
+
+1 row created.
+
+SQL> insert into cric values('DHRUV JUREL',46,112,51.55
+  2  );
+
+1 row created.
+
+SQL> insert into cric values('RAVINDRA JADEJA',36,66,36.14);
+
+1 row created.
+
+SQL> insert into cric values('RAVICHANDRAN ASHWIN',0,12,26.54);
+insert into cric values('RAVICHANDRAN ASHWIN',0,12,26.54)
+                        *
+ERROR at line 1:
+ORA-12899: value too large for column "SYSTEM"."CRIC"."NAME" (actual: 19, 
+maximum: 15) 
+
+
+SQL> alter table cric modify name varchar2(25);
+
+Table altered.
+
+SQL> insert into cric values('RAVICHANDRAN ASHWIN',0,12,26.54);
+
+1 row created.
+
+SQL> insert into cric values('KULDEEP YADAV',16,109,15.36);
+
+1 row created.
+
+SQL> insert into cric values('JASPRIT BUMRAH',8,35);
+insert into cric values('JASPRIT BUMRAH',8,35)
+            *
+ERROR at line 1:
+ORA-00947: not enough values 
+
+
+SQL> insert into cric values('JASPRIT BUMRAH',8,35,11.14);
+
+1 row created.
+
+SQL> insert into cric values('MOHAMMAD SIRAJ',0,6,9.12);
+
+1 row created.
+
+SQL> select * from cric;
+
+NAME                            RUNS      BALLS    AVERAGE                      
+------------------------- ---------- ---------- ----------                      
+ROHIT SHARMA                     109         91      46.39                      
+YASASWI JAISWAL                   54         61      65.49                      
+VIRAT KOHLI                       69        121      49.54                      
+SHARFARAZ KHAN                    56         52      53.12                      
+SHUBMAN GILL                      19         65      39.32                      
+DHRUV JUREL                       46        112      51.55                      
+RAVINDRA JADEJA                   36         66      36.14                      
+RAVICHANDRAN ASHWIN                0         12      26.54                      
+KULDEEP YADAV                     16        109      15.36                      
+JASPRIT BUMRAH                     8         35      11.14                      
+MOHAMMAD SIRAJ                     0          6       9.12                      
+
+11 rows selected.
+
+SQL> select name,runs,balls from cric;
+
+NAME                            RUNS      BALLS                                 
+------------------------- ---------- ----------                                 
+ROHIT SHARMA                     109         91                                 
+YASASWI JAISWAL                   54         61                                 
+VIRAT KOHLI                       69        121                                 
+SHARFARAZ KHAN                    56         52                                 
+SHUBMAN GILL                      19         65                                 
+DHRUV JUREL                       46        112                                 
+RAVINDRA JADEJA                   36         66                                 
+RAVICHANDRAN ASHWIN                0         12                                 
+KULDEEP YADAV                     16        109                                 
+JASPRIT BUMRAH                     8         35                                 
+MOHAMMAD SIRAJ                     0          6                                 
+
+11 rows selected.
+
+SQL> rename cric to bat_scorecard;
+
+Table renamed.
+
+SQL> select * from cric;
+select * from cric
+              *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> select * from bat_scorecard;
+
+NAME                            RUNS      BALLS    AVERAGE                      
+------------------------- ---------- ---------- ----------                      
+ROHIT SHARMA                     109         91      46.39                      
+YASASWI JAISWAL                   54         61      65.49                      
+VIRAT KOHLI                       69        121      49.54                      
+SHARFARAZ KHAN                    56         52      53.12                      
+SHUBMAN GILL                      19         65      39.32                      
+DHRUV JUREL                       46        112      51.55                      
+RAVINDRA JADEJA                   36         66      36.14                      
+RAVICHANDRAN ASHWIN                0         12      26.54                      
+KULDEEP YADAV                     16        109      15.36                      
+JASPRIT BUMRAH                     8         35      11.14                      
+MOHAMMAD SIRAJ                     0          6       9.12                      
+
+11 rows selected.
+
+SQL> truncate table bat_scorecard;
+
+Table truncated.
+
+SQL> select * from bat_scorecard;
+
+no rows selected
+
+SQL> drop table bat_scorecard;
+
+Table dropped.
+
+SQL> desc bat_scorecard;
+ERROR:
+ORA-04043: object bat_scorecard does not exist 
+
+
+SQL> select * from bat_scorecard;
+select * from bat_scorecard
+              *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> spool off;

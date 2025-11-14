@@ -1,0 +1,418 @@
+SQL> create table bow_info(name varchar2(15),overs number(4,1),wickets number(2));
+
+Table created.
+
+SQL> desc bow_info;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ NAME                                               VARCHAR2(15)
+ OVERS                                              NUMBER(4,1)
+ WICKETS                                            NUMBER(2)
+
+SQL> alter table bow_info add maidens number(2);
+
+Table altered.
+
+SQL> desc bow_info;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ NAME                                               VARCHAR2(15)
+ OVERS                                              NUMBER(4,1)
+ WICKETS                                            NUMBER(2)
+ MAIDENS                                            NUMBER(2)
+
+SQL> alter table bow_info drop column maidens;
+
+Table altered.
+
+SQL> desc bow_info;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ NAME                                               VARCHAR2(15)
+ OVERS                                              NUMBER(4,1)
+ WICKETS                                            NUMBER(2)
+
+SQL> alter table bow_info modify name varchar2(20);
+
+Table altered.
+
+SQL> desc bow_info;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ NAME                                               VARCHAR2(20)
+ OVERS                                              NUMBER(4,1)
+ WICKETS                                            NUMBER(2)
+
+SQL> drop table bow_scorecard;
+drop table bow_scorecard
+           *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> drop table bow_info;
+
+Table dropped.
+
+SQL> desc bow_info;
+ERROR:
+ORA-04043: object bow_info does not exist 
+
+
+SQL> create table batsman_info(jersey number(2),name varchar2(20),team varchar2(5));
+
+Table created.
+
+SQL> insert into batsman_info(45,'Rohit Sharma','MI');
+insert into batsman_info(45,'Rohit Sharma','MI')
+                         *
+ERROR at line 1:
+ORA-00928: missing SELECT keyword 
+
+
+SQL> insert into batsman_info values(45,'Rohit Sharma','MI');
+
+1 row created.
+
+SQL> insert into batsman_info values(18,'Virat Kohli','RCB');
+
+1 row created.
+
+SQL> insert into batsman_info values(07,'MS Dhoni','CSK');
+
+1 row created.
+
+SQL> insert into batsman_info values(17,'AB Devilliers','RCB');
+
+1 row created.
+
+SQL> select * from batsman_info;
+
+    JERSEY NAME                 TEAM                                            
+---------- -------------------- -----                                           
+        45 Rohit Sharma         MI                                              
+        18 Virat Kohli          RCB                                             
+         7 MS Dhoni             CSK                                             
+        17 AB Devilliers        RCB                                             
+
+SQL> alter table batsman_info add constraint my_const unique(jersey);
+
+Table altered.
+
+SQL> insert table batmsan_info values(17,'Rishabh Pant','DC');
+insert table batmsan_info values(17,'Rishabh Pant','DC')
+       *
+ERROR at line 1:
+ORA-00925: missing INTO keyword 
+
+
+SQL> insert into batmsan_info values(17,'Rishabh Pant','DC');
+insert into batmsan_info values(17,'Rishabh Pant','DC')
+            *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> insert into batsman_info values(17,'Rishabh Pant','DC');
+insert into batsman_info values(17,'Rishabh Pant','DC')
+*
+ERROR at line 1:
+ORA-00001: unique constraint (SYSTEM.MY_CONST) violated 
+
+
+SQL> alter table batsman_info drop constraint my_const;
+
+Table altered.
+
+SQL> alter table batsman_details add constraint primary_const primary key(jersey);
+alter table batsman_details add constraint primary_const primary key(jersey)
+*
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> alter table batsman_info add constraint primary_const primary key(jersey);
+
+Table altered.
+
+SQL> desc batsman_info;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ JERSEY                                    NOT NULL NUMBER(2)
+ NAME                                               VARCHAR2(20)
+ TEAM                                               VARCHAR2(5)
+
+SQL> insert into batsman_info values(null,'Keiron Pollard','MI');
+insert into batsman_info values(null,'Keiron Pollard','MI')
+                                *
+ERROR at line 1:
+ORA-01400: cannot insert NULL into ("SYSTEM"."BATSMAN_INFO"."JERSEY") 
+
+
+SQL> alter table batsman_info drop constraint primary_const;
+
+Table altered.
+
+SQL> desc batsman_info;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ JERSEY                                             NUMBER(2)
+ NAME                                               VARCHAR2(20)
+ TEAM                                               VARCHAR2(5)
+
+SQL> alter table batsman_info add constraint check_const check(jersey<100);
+
+Table altered.
+
+SQL> insert into batsman_info values(777,'Rishab Pant','DD');
+insert into batsman_info values(777,'Rishab Pant','DD')
+                                *
+ERROR at line 1:
+ORA-01438: value larger than specified precision allowed for this column 
+
+
+SQL> alter table modify jersey number(3);
+alter table modify jersey number(3)
+            *
+ERROR at line 1:
+ORA-00903: invalid table name 
+
+
+SQL> alter table batsman_info modify jersey number(3);
+
+Table altered.
+
+SQL> insert into batsman_info values(777,'Rishab Pant','DD');
+insert into batsman_info values(777,'Rishab Pant','DD')
+*
+ERROR at line 1:
+ORA-02290: check constraint (SYSTEM.CHECK_CONST) violated 
+
+
+SQL> alter table batsman_info drop constraint check_const;
+
+Table altered.
+
+SQL> drop table batsman_info;
+
+Table dropped.
+
+SQL> create table bat_info(bat_pos number(2) not null,name varchar2(20),team varchar2(10) default 'INDIA');
+
+Table created.
+
+SQL> desc bat_info;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ BAT_POS                                   NOT NULL NUMBER(2)
+ NAME                                               VARCHAR2(20)
+ TEAM                                               VARCHAR2(10)
+
+SQL> insert into bat_info values(01,'Rohit Sharma','INDIA');
+
+1 row created.
+
+SQL> insert into bat_info values(02,'Shubman Gill');
+insert into bat_info values(02,'Shubman Gill')
+            *
+ERROR at line 1:
+ORA-00947: not enough values 
+
+
+SQL> insert into bat_info values(02,'Shubman Gill','');
+
+1 row created.
+
+SQL> 
+SQL> insert into bat_info(bat_pos,name) vlaues(03,'Virat Kohli');
+insert into bat_info(bat_pos,name) vlaues(03,'Virat Kohli')
+                                   *
+ERROR at line 1:
+ORA-00926: missing VALUES keyword 
+
+
+SQL> insert into bat_info(bat_pos,name) values(03,'Virat Kohli');
+
+1 row created.
+
+SQL> insert into bat_info(bat_pos,name) values(04,'Kl Rahul');
+
+1 row created.
+
+SQL> seelct * from bat_info;
+SP2-0734: unknown command beginning "seelct * f..." - rest of line ignored.
+SQL> select * from bat_info;
+
+   BAT_POS NAME                 TEAM                                            
+---------- -------------------- ----------                                      
+         1 Rohit Sharma         INDIA                                           
+         2 Shubman Gill                                                         
+         3 Virat Kohli          INDIA                                           
+         4 Kl Rahul             INDIA                                           
+
+SQL> drop table bat_info;
+
+Table dropped.
+
+SQL> create table bat_info(bat_pos number(2),name varchar2(20),team varchar2(10));
+
+Table created.
+
+SQL> alter table bat_info modify bat_pos number(2) not null;
+
+Table altered.
+
+SQL> desc bat_info;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ BAT_POS                                   NOT NULL NUMBER(2)
+ NAME                                               VARCHAR2(20)
+ TEAM                                               VARCHAR2(10)
+
+SQL> drop table bat_info;
+
+Table dropped.
+
+SQL> create table bat_info(bat_pos number(2) primary key,name varchar2(20),team varchar2(10));
+
+Table created.
+
+SQL> desc bat_info;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ BAT_POS                                   NOT NULL NUMBER(2)
+ NAME                                               VARCHAR2(20)
+ TEAM                                               VARCHAR2(10)
+
+SQL> insert into bat_info values(05
+  2  ,'Suryakumar Yadav','INDIA');
+
+1 row created.
+
+SQL> insert into bat_info values(06,'Rishab Pant','INDIA');
+
+1 row created.
+
+SQL> insert into bat_info values(07,'Ravindra Jadeja','INDIA');
+
+1 row created.
+
+SQL> select * from bat_info;
+
+   BAT_POS NAME                 TEAM                                            
+---------- -------------------- ----------                                      
+         5 Suryakumar Yadav     INDIA                                           
+         6 Rishab Pant          INDIA                                           
+         7 Ravindra Jadeja      INDIA                                           
+
+SQL> create table bow_info(b_name varchar2(20),type varchar2(10),bat_pos number(2),foreign key(bat_pos) references bat_info(bat_pos));
+
+Table created.
+
+SQL> desc bow_info;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ B_NAME                                             VARCHAR2(20)
+ TYPE                                               VARCHAR2(10)
+ BAT_POS                                            NUMBER(2)
+
+SQL> insert into bow_info('Mohammad Shami','Med Fast',08);
+insert into bow_info('Mohammad Shami','Med Fast',08)
+                     *
+ERROR at line 1:
+ORA-00928: missing SELECT keyword 
+
+
+SQL> insert into bow_info values('Mohammad Shami','Med Fast',08);
+insert into bow_info values('Mohammad Shami','Med Fast',08)
+*
+ERROR at line 1:
+ORA-02291: integrity constraint (SYSTEM.SYS_C008330) violated - parent key not 
+found 
+
+
+SQL> drop table bow_info;
+
+Table dropped.
+
+SQL> create table bow_info(b_name varchar2(20),type varchar2(10),team varcahr2(10),foreign key(team) references bat_info(team));
+create table bow_info(b_name varchar2(20),type varchar2(10),team varcahr2(10),foreign key(team) references bat_info(team))
+                                                                         *
+ERROR at line 1:
+ORA-00907: missing right parenthesis 
+
+
+SQL> create table bow_info(b_name varchar2(20),type varchar2(10),team varchar2(10),foreign key(team) references bat_info(team));
+create table bow_info(b_name varchar2(20),type varchar2(10),team varchar2(10),foreign key(team) references bat_info(team))
+                                                                                                                    *
+ERROR at line 1:
+ORA-02270: no matching unique or primary key for this column-list 
+
+
+SQL> create table bow_info(b_name varchar2(20),type varchar2(10),bat_pos number(2),foreign key(bat_pos) references bat_info(bat_pos));
+
+Table created.
+
+SQL> insert into bow_info('Mohammad Shami','Med Fast',01);
+insert into bow_info('Mohammad Shami','Med Fast',01)
+                     *
+ERROR at line 1:
+ORA-00928: missing SELECT keyword 
+
+
+SQL> insert into bow_info values('Mohammad Shami','Med Fast',01);
+insert into bow_info values('Mohammad Shami','Med Fast',01)
+*
+ERROR at line 1:
+ORA-02291: integrity constraint (SYSTEM.SYS_C008331) violated - parent key not 
+found 
+
+
+SQL> desc bow_info;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ B_NAME                                             VARCHAR2(20)
+ TYPE                                               VARCHAR2(10)
+ BAT_POS                                            NUMBER(2)
+
+SQL> insert into bow_info values('Mohammad Shami','Med Fast',1);
+insert into bow_info values('Mohammad Shami','Med Fast',1)
+*
+ERROR at line 1:
+ORA-02291: integrity constraint (SYSTEM.SYS_C008331) violated - parent key not 
+found 
+
+
+SQL> insert into bow_info values('Mohammad Shami','Med Fast',5);
+
+1 row created.
+
+SQL> insert into bow_info values('Jasprit Bumrah','Fast',6);
+
+1 row created.
+
+SQL> insert into bow_info values('Kuldeep Yadav','chainaman',7);
+
+1 row created.
+
+SQL> select * from boW_info;
+
+B_NAME               TYPE          BAT_POS                                      
+-------------------- ---------- ----------                                      
+Mohammad Shami       Med Fast            5                                      
+Jasprit Bumrah       Fast                6                                      
+Kuldeep Yadav        chainaman           7                                      
+
+SQL> insert into bow_info values('Mohammad Siraj','Fast Med',8);
+insert into bow_info values('Mohammad Siraj','Fast Med',8)
+*
+ERROR at line 1:
+ORA-02291: integrity constraint (SYSTEM.SYS_C008331) violated - parent key not 
+found 
+
+
+SQL> commit;
+
+Commit complete.
+
+SQL> spool off;

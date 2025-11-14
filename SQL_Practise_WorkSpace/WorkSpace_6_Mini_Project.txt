@@ -1,0 +1,287 @@
+SQL> create table cricketer(jersey number(2),name varchar2(20),team varchar2(5));
+
+Table created.
+
+SQL> insert into cricketer values(45,'Rohit','MI');
+
+1 row created.
+
+SQL> insert into cricketer values(18,'Virat','RCB');
+
+1 row created.
+
+SQL> insert into cricketer values(07,'Mahi','CSK');
+
+1 row created.
+
+SQL> select * from cricketer;
+
+    JERSEY NAME                 TEAM                                            
+---------- -------------------- -----                                           
+        45 Rohit                MI                                              
+        18 Virat                RCB                                             
+         7 Mahi                 CSK                                             
+
+SQL> alter table cricketer add noofmatches number(3);
+
+Table altered.
+
+SQL> desc cricketer;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ JERSEY                                             NUMBER(2)
+ NAME                                               VARCHAR2(20)
+ TEAM                                               VARCHAR2(5)
+ NOOFMATCHES                                        NUMBER(3)
+
+SQL> select * from cricketer;
+
+    JERSEY NAME                 TEAM  NOOFMATCHES                               
+---------- -------------------- ----- -----------                               
+        45 Rohit                MI                                              
+        18 Virat                RCB                                             
+         7 Mahi                 CSK                                             
+
+SQL> update cricketer set noofmatches=247 where jersey=45;
+
+1 row updated.
+
+SQL> update cricketer set noofmatches=230 where jersey=18;
+
+1 row updated.
+
+SQL> update cricketer set noofmatches=256 where jersey=07;
+
+1 row updated.
+
+SQL> select * from cricketer;
+
+    JERSEY NAME                 TEAM  NOOFMATCHES                               
+---------- -------------------- ----- -----------                               
+        45 Rohit                MI            247                               
+        18 Virat                RCB           230                               
+         7 Mahi                 CSK           256                               
+
+SQL> insert into cricketer values(25,'Sikhar','PBKS',229);
+
+1 row created.
+
+SQL> insert into cricketer values(17,'AB Devilliers','RCB',220);
+
+1 row created.
+
+SQL> insert into cricketer values(01,'KL Rahul','LSG',194);
+
+1 row created.
+
+SQL> select * from cricketer;
+
+    JERSEY NAME                 TEAM  NOOFMATCHES                               
+---------- -------------------- ----- -----------                               
+        45 Rohit                MI            247                               
+        18 Virat                RCB           230                               
+         7 Mahi                 CSK           256                               
+        25 Sikhar               PBKS          229                               
+        17 AB Devilliers        RCB           220                               
+         1 KL Rahul             LSG           194                               
+
+6 rows selected.
+
+SQL> select jersey,count(jersey) from cricketer group by jersey;
+
+    JERSEY COUNT(JERSEY)                                                        
+---------- -------------                                                        
+        45             1                                                        
+        18             1                                                        
+         7             1                                                        
+        25             1                                                        
+        17             1                                                        
+         1             1                                                        
+
+6 rows selected.
+
+SQL> select noofmatches,count(noofmatches) from cricketer group by noofmatches;
+
+NOOFMATCHES COUNT(NOOFMATCHES)                                                  
+----------- ------------------                                                  
+        247                  1                                                  
+        230                  1                                                  
+        256                  1                                                  
+        229                  1                                                  
+        220                  1                                                  
+        194                  1                                                  
+
+6 rows selected.
+
+SQL> select jersey,count(jersey) from cricketer group by jersey order by count(jersey);
+
+    JERSEY COUNT(JERSEY)                                                        
+---------- -------------                                                        
+        45             1                                                        
+        18             1                                                        
+         1             1                                                        
+        25             1                                                        
+        17             1                                                        
+         7             1                                                        
+
+6 rows selected.
+
+SQL> select jersey,count(jersey) from cricketer group by jersey order by count(noofmatches);
+
+    JERSEY COUNT(JERSEY)                                                        
+---------- -------------                                                        
+        45             1                                                        
+        18             1                                                        
+         1             1                                                        
+        25             1                                                        
+        17             1                                                        
+         7             1                                                        
+
+6 rows selected.
+
+SQL> select noofmatches,count(noofmatches) from cricketer group by noofmatches order by count(jersey);
+
+NOOFMATCHES COUNT(NOOFMATCHES)                                                  
+----------- ------------------                                                  
+        247                  1                                                  
+        230                  1                                                  
+        194                  1                                                  
+        229                  1                                                  
+        220                  1                                                  
+        256                  1                                                  
+
+6 rows selected.
+
+SQL> select noofmatches,count(noofmatches) from cricketer group by noofmatches order by count(noofmatches);
+
+NOOFMATCHES COUNT(NOOFMATCHES)                                                  
+----------- ------------------                                                  
+        247                  1                                                  
+        230                  1                                                  
+        194                  1                                                  
+        229                  1                                                  
+        220                  1                                                  
+        256                  1                                                  
+
+6 rows selected.
+
+SQL> select name,count(jersey) from cricketer group by name;
+
+NAME                 COUNT(JERSEY)                                              
+-------------------- -------------                                              
+Rohit                            1                                              
+Virat                            1                                              
+Mahi                             1                                              
+Sikhar                           1                                              
+AB Devilliers                    1                                              
+KL Rahul                         1                                              
+
+6 rows selected.
+
+SQL> select team,count(jersey) from cricketer group by team;
+
+TEAM  COUNT(JERSEY)                                                             
+----- -------------                                                             
+MI                1                                                             
+RCB               2                                                             
+CSK               1                                                             
+PBKS              1                                                             
+LSG               1                                                             
+
+SQL> select name,count(jersey) from cricketer group by name;
+
+NAME                 COUNT(JERSEY)                                              
+-------------------- -------------                                              
+Rohit                            1                                              
+Virat                            1                                              
+Mahi                             1                                              
+Sikhar                           1                                              
+AB Devilliers                    1                                              
+KL Rahul                         1                                              
+
+6 rows selected.
+
+SQL> select * from cricketer order by noofmatches;
+
+    JERSEY NAME                 TEAM  NOOFMATCHES                               
+---------- -------------------- ----- -----------                               
+         1 KL Rahul             LSG           194                               
+        17 AB Devilliers        RCB           220                               
+        25 Sikhar               PBKS          229                               
+        18 Virat                RCB           230                               
+        45 Rohit                MI            247                               
+         7 Mahi                 CSK           256                               
+
+6 rows selected.
+
+SQL> select * from cricketer order by jersey;
+
+    JERSEY NAME                 TEAM  NOOFMATCHES                               
+---------- -------------------- ----- -----------                               
+         1 KL Rahul             LSG           194                               
+         7 Mahi                 CSK           256                               
+        17 AB Devilliers        RCB           220                               
+        18 Virat                RCB           230                               
+        25 Sikhar               PBKS          229                               
+        45 Rohit                MI            247                               
+
+6 rows selected.
+
+SQL> select * from cricketer order by jersey desc;
+
+    JERSEY NAME                 TEAM  NOOFMATCHES                               
+---------- -------------------- ----- -----------                               
+        45 Rohit                MI            247                               
+        25 Sikhar               PBKS          229                               
+        18 Virat                RCB           230                               
+        17 AB Devilliers        RCB           220                               
+         7 Mahi                 CSK           256                               
+         1 KL Rahul             LSG           194                               
+
+6 rows selected.
+
+SQL> select * from cricketer order by noofmatches;
+
+    JERSEY NAME                 TEAM  NOOFMATCHES                               
+---------- -------------------- ----- -----------                               
+         1 KL Rahul             LSG           194                               
+        17 AB Devilliers        RCB           220                               
+        25 Sikhar               PBKS          229                               
+        18 Virat                RCB           230                               
+        45 Rohit                MI            247                               
+         7 Mahi                 CSK           256                               
+
+6 rows selected.
+
+SQL> select jersey,count(jersey) from cricketer group by jersey having count(jersey)=2;
+
+no rows selected
+
+SQL> select noofmatches,count(noofmatches) from cricketer group by noofmatches having count(noofmatches)=2;
+
+no rows selected
+
+SQL> select jersey,count(noofmatches) from cricketer group by jersey having count(*)>=1;
+
+    JERSEY COUNT(NOOFMATCHES)                                                   
+---------- ------------------                                                   
+        45                  1                                                   
+        18                  1                                                   
+         7                  1                                                   
+        25                  1                                                   
+        17                  1                                                   
+         1                  1                                                   
+
+6 rows selected.
+
+SQL> select team,count(jersey) from cricketer group by team having count(*)>=1;
+
+TEAM  COUNT(JERSEY)                                                             
+----- -------------                                                             
+MI                1                                                             
+RCB               2                                                             
+CSK               1                                                             
+PBKS              1                                                             
+LSG               1                                                             
+
+SQL> spool off;

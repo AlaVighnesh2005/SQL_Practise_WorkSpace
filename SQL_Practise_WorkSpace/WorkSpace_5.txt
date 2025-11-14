@@ -1,0 +1,173 @@
+SQL> create table student_details(sid number(4),sname varchar2(20),branch varchar2(10));
+create table student_details(sid number(4),sname varchar2(20),branch varchar2(10))
+             *
+ERROR at line 1:
+ORA-00955: name is already used by an existing object 
+
+
+SQL> create table student_info(sid number(4),sname varchar2(20),branch varchar2(10));
+
+Table created.
+
+SQL> desc student_info;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ SID                                                NUMBER(4)
+ SNAME                                              VARCHAR2(20)
+ BRANCH                                             VARCHAR2(10)
+
+SQL> insert into student_info values(101,'Mahi','IT');
+
+1 row created.
+
+SQL> insert into student_info values(102,'Rohit','CSE');
+
+1 row created.
+
+SQL> insert into student_info values(103,'Surya','ECE');
+
+1 row created.
+
+SQL> select * from student_info;
+
+       SID SNAME                BRANCH                                          
+---------- -------------------- ----------                                      
+       101 Mahi                 IT                                              
+       102 Rohit                CSE                                             
+       103 Surya                ECE                                             
+
+SQL> select sid,name from student_info;
+select sid,name from student_info
+           *
+ERROR at line 1:
+ORA-00904: "NAME": invalid identifier 
+
+
+SQL> select sid,sname from student_info;
+
+       SID SNAME                                                                
+---------- --------------------                                                 
+       101 Mahi                                                                 
+       102 Rohit                                                                
+       103 Surya                                                                
+
+SQL> select sname,branch from student_info;
+
+SNAME                BRANCH                                                     
+-------------------- ----------                                                 
+Mahi                 IT                                                         
+Rohit                CSE                                                        
+Surya                ECE                                                        
+
+SQL> select sid from student_info;
+
+       SID                                                                      
+----------                                                                      
+       101                                                                      
+       102                                                                      
+       103                                                                      
+
+SQL> select sid as STUDENT_ID,sname as STUDENT_NAME,branch as S_BRANCH from student_info;
+
+STUDENT_ID STUDENT_NAME         S_BRANCH                                        
+---------- -------------------- ----------                                      
+       101 Mahi                 IT                                              
+       102 Rohit                CSE                                             
+       103 Surya                ECE                                             
+
+SQL> select distinct pid from student_info;
+select distinct pid from student_info
+                *
+ERROR at line 1:
+ORA-00904: "PID": invalid identifier 
+
+
+SQL> select distinct sid from student_info;
+
+       SID                                                                      
+----------                                                                      
+       101                                                                      
+       102                                                                      
+       103                                                                      
+
+SQL> select * from student_info where sid>101;
+
+       SID SNAME                BRANCH                                          
+---------- -------------------- ----------                                      
+       102 Rohit                CSE                                             
+       103 Surya                ECE                                             
+
+SQL> insert into student_info(sid,sname,branch) values(104,'Rahul','EEE');
+
+1 row created.
+
+SQL> insert into student_info(sid,sname,branch) values(&sid,&sname,&branch);
+Enter value for sid: 105
+Enter value for sname: 'Sikhar'
+Enter value for branch: 'MECH'
+old   1: insert into student_info(sid,sname,branch) values(&sid,&sname,&branch)
+new   1: insert into student_info(sid,sname,branch) values(105,'Sikhar','MECH')
+
+1 row created.
+
+SQL> insert into student_info(sid,sname,branch) values(&sid,&sname,&branch);
+Enter value for sid: 106
+Enter value for sname: 'Virat'
+Enter value for branch: 'IT'
+old   1: insert into student_info(sid,sname,branch) values(&sid,&sname,&branch)
+new   1: insert into student_info(sid,sname,branch) values(106,'Virat','IT')
+
+1 row created.
+
+SQL> select * from student_info;
+
+       SID SNAME                BRANCH                                          
+---------- -------------------- ----------                                      
+       101 Mahi                 IT                                              
+       102 Rohit                CSE                                             
+       103 Surya                ECE                                             
+       104 Rahul                EEE                                             
+       105 Sikhar               MECH                                            
+       106 Virat                IT                                              
+
+6 rows selected.
+
+SQL> update student_info set branch='CSE' where sid=104;
+
+1 row updated.
+
+SQL> update student_info set branch='CSE' where sid=105;
+
+1 row updated.
+
+SQL> select * from student_info;
+
+       SID SNAME                BRANCH                                          
+---------- -------------------- ----------                                      
+       101 Mahi                 IT                                              
+       102 Rohit                CSE                                             
+       103 Surya                ECE                                             
+       104 Rahul                CSE                                             
+       105 Sikhar               CSE                                             
+       106 Virat                IT                                              
+
+6 rows selected.
+
+SQL> delete from student_info where sid=103;
+
+1 row deleted.
+
+SQL> delete from student_info where sid=104;
+
+1 row deleted.
+
+SQL> select * from student_info;
+
+       SID SNAME                BRANCH                                          
+---------- -------------------- ----------                                      
+       101 Mahi                 IT                                              
+       102 Rohit                CSE                                             
+       105 Sikhar               CSE                                             
+       106 Virat                IT                                              
+
+SQL> spool off;

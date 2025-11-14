@@ -1,0 +1,289 @@
+SQL> create table student_details(sid number(4),sname varchar2(20),branch varchar2(10));
+
+Table created.
+
+SQL> desc student_details;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ SID                                                NUMBER(4)
+ SNAME                                              VARCHAR2(20)
+ BRANCH                                             VARCHAR2(10)
+
+SQL> insert into student_details values(101,'surya','it');
+
+1 row created.
+
+SQL> insert into student_details values(102,'rohit','cse');
+
+1 row created.
+
+SQL> insert into student_details values(103,'suresh','ece');
+
+1 row created.
+
+SQL> select * from student_details;
+
+       SID SNAME                BRANCH                                          
+---------- -------------------- ----------                                      
+       101 surya                it                                              
+       102 rohit                cse                                             
+       103 suresh               ece                                             
+
+SQL> alter table student_details add address varchar2(20);
+
+Table altered.
+
+SQL> desc student_details;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ SID                                                NUMBER(4)
+ SNAME                                              VARCHAR2(20)
+ BRANCH                                             VARCHAR2(10)
+ ADDRESS                                            VARCHAR2(20)
+
+SQL> select * from student_details;
+
+       SID SNAME                BRANCH     ADDRESS                              
+---------- -------------------- ---------- --------------------                 
+       101 surya                it                                              
+       102 rohit                cse                                             
+       103 suresh               ece                                             
+
+SQL> update student_details set address='Vijayawada' where sid=101;
+
+1 row updated.
+
+SQL> update student_details set address='Vizag' where sid=102;
+
+1 row updated.
+
+SQL> update student_details set address='Guntur' where sid=103;
+
+1 row updated.
+
+SQL> select * from student_details;
+
+       SID SNAME                BRANCH     ADDRESS                              
+---------- -------------------- ---------- --------------------                 
+       101 surya                it         Vijayawada                           
+       102 rohit                cse        Vizag                                
+       103 suresh               ece        Guntur                               
+
+SQL> alter table student_details add avg_marks number(3);
+
+Table altered.
+
+SQL> desc student_details;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ SID                                                NUMBER(4)
+ SNAME                                              VARCHAR2(20)
+ BRANCH                                             VARCHAR2(10)
+ ADDRESS                                            VARCHAR2(20)
+ AVG_MARKS                                          NUMBER(3)
+
+SQL> select * from student_details;
+
+       SID SNAME                BRANCH     ADDRESS               AVG_MARKS      
+---------- -------------------- ---------- -------------------- ----------      
+       101 surya                it         Vijayawada                           
+       102 rohit                cse        Vizag                                
+       103 suresh               ece        Guntur                               
+
+SQL> update student_details set avg_marks=82 where sid=101;
+
+1 row updated.
+
+
+SQL> update student_details set avg_marks=87 where sid=102;
+
+1 row updated.
+
+SQL> update student_details set avg_marks=76 where sid=103;
+
+1 row updated.
+
+SQL> select * from student_details;
+
+       SID SNAME                BRANCH     ADDRESS               AVG_MARKS      
+---------- -------------------- ---------- -------------------- ----------      
+       101 surya                it         Vijayawada                   82      
+       102 rohit                cse        Vizag                        87      
+       103 suresh               ece        Guntur                       76      
+
+SQL> select sid,sname,branch,address,avg_marks from student_details;
+
+       SID SNAME                BRANCH     ADDRESS               AVG_MARKS      
+---------- -------------------- ---------- -------------------- ----------      
+       101 surya                it         Vijayawada                   82      
+       102 rohit                cse        Vizag                        87      
+       103 suresh               ece        Guntur                       76      
+
+SQL> select sid,sname,branch,address,avg_marks+5 from student_details;
+
+       SID SNAME                BRANCH     ADDRESS              AVG_MARKS+5     
+---------- -------------------- ---------- -------------------- -----------     
+       101 surya                it         Vijayawada                    87     
+       102 rohit                cse        Vizag                         92     
+       103 suresh               ece        Guntur                        81     
+
+SQL> select sid,sname,branch,address,avg_marks-5 from student_details;
+
+       SID SNAME                BRANCH     ADDRESS              AVG_MARKS-5     
+---------- -------------------- ---------- -------------------- -----------     
+       101 surya                it         Vijayawada                    77     
+       102 rohit                cse        Vizag                         82     
+       103 suresh               ece        Guntur                        71     
+
+SQL> select sid,sname,branch,address,avg_marks*5 from student_details;
+
+       SID SNAME                BRANCH     ADDRESS              AVG_MARKS*5     
+---------- -------------------- ---------- -------------------- -----------     
+       101 surya                it         Vijayawada                   410     
+       102 rohit                cse        Vizag                        435     
+       103 suresh               ece        Guntur                       380     
+
+SQL> select sid,sname,branch,address,avg_marks/5 from student_details;
+
+       SID SNAME                BRANCH     ADDRESS              AVG_MARKS/5     
+---------- -------------------- ---------- -------------------- -----------     
+       101 surya                it         Vijayawada                  16.4     
+       102 rohit                cse        Vizag                       17.4     
+       103 suresh               ece        Guntur                      15.2     
+
+SQL> select * from student_details;
+
+       SID SNAME                BRANCH     ADDRESS               AVG_MARKS      
+---------- -------------------- ---------- -------------------- ----------      
+       101 surya                it         Vijayawada                   82      
+       102 rohit                cse        Vizag                        87      
+       103 suresh               ece        Guntur                       76      
+
+
+SQL> select * from student_details where avg_marks>70;
+
+       SID SNAME                BRANCH     ADDRESS               AVG_MARKS      
+---------- -------------------- ---------- -------------------- ----------      
+       101 surya                it         Vijayawada                   82      
+       102 rohit                cse        Vizag                        87      
+       103 suresh               ece        Guntur                       76      
+
+SQL> select * from student_details where avg_marks>80;
+
+       SID SNAME                BRANCH     ADDRESS               AVG_MARKS      
+---------- -------------------- ---------- -------------------- ----------      
+       101 surya                it         Vijayawada                   82      
+       102 rohit                cse        Vizag                        87      
+
+SQL> select * from student_details where avg_marks<80;
+
+       SID SNAME                BRANCH     ADDRESS               AVG_MARKS      
+---------- -------------------- ---------- -------------------- ----------      
+       103 suresh               ece        Guntur                       76      
+
+SQL> select * from student_details where avg_marks<=80;
+
+       SID SNAME                BRANCH     ADDRESS               AVG_MARKS      
+---------- -------------------- ---------- -------------------- ----------      
+       103 suresh               ece        Guntur                       76      
+
+SQL> select * from student_details where avg_marks>=80;
+
+       SID SNAME                BRANCH     ADDRESS               AVG_MARKS      
+---------- -------------------- ---------- -------------------- ----------      
+       101 surya                it         Vijayawada                   82      
+       102 rohit                cse        Vizag                        87      
+
+SQL> select * from student_details where avg_marks<>80;
+
+       SID SNAME                BRANCH     ADDRESS               AVG_MARKS      
+---------- -------------------- ---------- -------------------- ----------      
+       101 surya                it         Vijayawada                   82      
+       102 rohit                cse        Vizag                        87      
+       103 suresh               ece        Guntur                       76      
+
+SQL> select * from student_details where avg_marks between 75 and 85;
+
+       SID SNAME                BRANCH     ADDRESS               AVG_MARKS      
+---------- -------------------- ---------- -------------------- ----------      
+       101 surya                it         Vijayawada                   82      
+       103 suresh               ece        Guntur                       76      
+
+SQL> select * from student_details where avg_marks not between 75 and 85;
+
+       SID SNAME                BRANCH     ADDRESS               AVG_MARKS      
+---------- -------------------- ---------- -------------------- ----------      
+       102 rohit                cse        Vizag                        87      
+
+SQL> select * from student_details where avg_marks in 75;
+
+no rows selected
+
+SQL> select * from student_details where avg_marks in (75,85);
+
+no rows selected
+
+SQL> select * from student_details where avg_marks in (87);
+
+       SID SNAME                BRANCH     ADDRESS               AVG_MARKS      
+---------- -------------------- ---------- -------------------- ----------      
+       102 rohit                cse        Vizag                        87      
+
+SQL> select * from student_details where sname like '_u%';
+
+       SID SNAME                BRANCH     ADDRESS               AVG_MARKS      
+---------- -------------------- ---------- -------------------- ----------      
+       101 surya                it         Vijayawada                   82      
+       103 suresh               ece        Guntur                       76      
+
+SQL> select * from student_details where sname like '%a';
+
+       SID SNAME                BRANCH     ADDRESS               AVG_MARKS      
+---------- -------------------- ---------- -------------------- ----------      
+       101 surya                it         Vijayawada                   82      
+
+SQL> select * from student_details where address like '__z%';
+
+       SID SNAME                BRANCH     ADDRESS               AVG_MARKS      
+---------- -------------------- ---------- -------------------- ----------      
+       102 rohit                cse        Vizag                        87      
+
+SQL> select * from student_details where address like '%r';
+
+       SID SNAME                BRANCH     ADDRESS               AVG_MARKS      
+---------- -------------------- ---------- -------------------- ----------      
+       103 suresh               ece        Guntur                       76      
+
+
+SQL> insert into student_details(sid,sname,branch,address) values(104,'rahul','it','vijayawada');
+
+1 row created.
+
+SQL> select * from student_details;
+
+       SID SNAME                BRANCH     ADDRESS               AVG_MARKS      
+---------- -------------------- ---------- -------------------- ----------      
+       101 surya                it         Vijayawada                   82      
+       102 rohit                cse        Vizag                        87      
+       103 suresh               ece        Guntur                       76      
+       104 rahul                it         vijayawada                           
+
+SQL> select * from student_details where avg_marks is null;
+
+       SID SNAME                BRANCH     ADDRESS               AVG_MARKS      
+---------- -------------------- ---------- -------------------- ----------      
+       104 rahul                it         vijayawada                           
+
+SQL> delete from student_details where sid=104;
+
+1 row deleted.
+
+SQL> select * from student_details;
+
+       SID SNAME                BRANCH     ADDRESS               AVG_MARKS      
+---------- -------------------- ---------- -------------------- ----------      
+       101 surya                it         Vijayawada                   82      
+       102 rohit                cse        Vizag                        87      
+       103 suresh               ece        Guntur                       76      
+
+SQL> spool off;
